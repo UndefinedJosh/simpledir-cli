@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+dist/
+
+# TypeScript build artifacts
+*.js
+*.js.map
+
+# IDE/editor specific files
+.vscode/
+*.code-workspace
+.DS_Store
+
+# Logs
+*.log
