@@ -1,0 +1,17 @@
+name: Semantic Commits
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  conventional_commits:
+    name: Semantic commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: webiny/action-conventional-commits@v1.3.0
