@@ -1,6 +1,7 @@
 # SimpleDir CLI
 
-SimpleDir is a command-line interface (CLI) tool for managing directories and files. It provides simple commands to create, delete directories, create, and delete files, and list directory contents.
+SimpleDir is a command-line interface (CLI) tool for managing directories and files.
+It provides simple commands to create, delete directories, create, and delete files, and list directory contents.
 
 ## Features
 
@@ -83,4 +84,4 @@ Contributions are welcome! Please follow these steps to contribute:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Karxem/simpledir-cli/blob/main/LICENSE) file for details.
