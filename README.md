@@ -31,34 +31,26 @@ simpledir -l <directory_path>
 
 Use the `-l` or `--ls` option followed by the path of the directory to list its contents.
 
-### Create a Directory
+### Create a Directory or File
 
 ```bash
-simpledir -m <directory_name>
+simpledir mk <name> [options] [extension]
 ```
 
-Use the `-m` or `--mkdir` option followed by the name of the directory you want to create.
+Use the `mk` option followed by the name of the directory you want to create.
 
-### Delete a Directory
+### Delete a Directory or File
 
 ```bash
-simpledir -r <directory_path>
+simpledir rm <name> [options]
 ```
 
-Use the `-r` or `--rmdir` option followed by the path of the directory you want to delete.
-
-### Create a File
-
-```bash
-simpledir -t <file_name>
-```
-
-Use the `-t` or `--touch` option followed by the name of the file you want to create.
+Use the `rm` option followed by the path of the directory you want to delete.
 
 ## Example
-
+Create a JavaScript file using sid:
 ```bash
-simpledir -m new_directory
+simpledir m --file my_file js
 ```
 
 This command will create a directory named `new_directory` in the current working directory.
