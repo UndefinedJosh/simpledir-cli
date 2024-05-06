@@ -9,40 +9,37 @@ const figlet = require('figlet');
 
 const program = new Command();
 
-program
+program.name('simpledir')
   .description('A CLI tool for managing directories')
-  .version('1.0.0', '-v, --version', 'show cli version')
-  .helpOption('-h, --help', 'display help for options')
+  .version('1.0.0', '-v, --version', 'output cli version')
+  .usage('<command> | [option]')
+  .helpOption('-h, --help', 'display help overview')
   .option('-l, --ls [directory_path]', 'list directory contents')
-  .option('-m, --mkdir <directory_name>', 'create a directory')
-  .option('-r, --rmdir <directory_path>', 'delete a directory')
-  .option('-t, --touch <file_name>', 'create a file')
-  .option('-d, --delete <file_name>', 'delete a file')
-  .option('-nr, --no-recursive', 'disable recursive deletion');
-  
-program.parse(process.argv);
+  .action((options: any) => {
+    if (!options.ls) {
+      program.outputHelp();
+      return;
+    }
 
-const options = program.opts();
-const processPath = process.cwd();
-
-switch (true) {
-  case Boolean(options.ls):
-    const lsPath = typeof options.ls === 'string' ? options.ls : processPath;
+    const lsPath = typeof options.ls === 'string' ? options.ls : process.cwd();
     DirectoryManager.listDirectoryContent(lsPath);
-    break;
-  case Boolean(options.mkdir):
-    DirectoryManager.createDirectory(path.resolve(processPath, options.mkdir));
-    break;
-  case Boolean(options.rmdir):
-    const recursive = options.recursive !== false; // Convert undefined to true
-    console.info('Recursive deletion:', recursive);
-    DirectoryManager.deleteDirectory(path.resolve(processPath, options.rmdir), recursive);
-    break;
-  case Boolean(options.touch):
-    FileManager.createFile(path.resolve(processPath, options.touch));
-    break;
-  default:
-    console.log(figlet.textSync('simpleDir'));
-    program.outputHelp();
-    break;
-}
+  })
+
+program.showHelpAfterError('use --help for additional information');
+
+program.command('rm')
+  .alias('r')
+  .usage("<name> [options]")
+  .description('delete the selected file or directory')
+  .summary("delete dir or file")
+  .argument('<name>', 'file or directory name')
+  .option('--no-recursive', 'disable recursion')
+  .action((name: string, options: any) => {
+    const recursive = options.recursive !== false;
+    DirectoryManager.deleteByName(path.resolve(process.cwd(), name), recursive);
+  });
+
+
+program.addHelpText('before', `${figlet.textSync('simpleDir')}`);
+
+program.parse(process.argv);

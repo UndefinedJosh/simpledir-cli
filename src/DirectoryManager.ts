@@ -11,25 +11,6 @@ export class DirectoryManager {
     }
   }
 
-  static async deleteDirectory(filePath: string, recursive: boolean) {
-    try {
-      // Check if recursive deletion is disabled and the path is a directory
-      if (!recursive) {
-        const stats = await fs.lstat(filePath);
-        if (stats.isDirectory()) {
-          console.error(`Cannot delete '${path.basename(filePath)}': It is a directory.`);
-          return;
-        }
-      }
-
-      await fs.rm(filePath, { recursive: recursive });
-
-      console.log(`Directory ${path.basename(filePath)} deleted successfully.`);
-    } catch (error) {
-      console.error('Deletion failed:', error);
-    }
-  }
-
   static async listDirectoryContent(filePath: string) {
     try {
       const files = await fs.readdir(filePath);
@@ -46,5 +27,23 @@ export class DirectoryManager {
       console.error('Error occurred while reading the directory:', error);
     }
   }
+  
+  static async deleteByName(filePath: string, recursive: boolean) {
+    try {
+      // Check if recursive deletion is disabled and the path is a directory
+      if (!recursive) {
+        const stats = await fs.lstat(filePath);
+        if (stats.isDirectory()) {
+          console.error(`Cannot delete '${path.basename(filePath)}': It's a directory.`);
+          return;
+        }
+      }
 
+      await fs.rm(filePath, { recursive: recursive });
+
+      console.log(`Directory ${path.basename(filePath)} deleted successfully.`);
+    } catch (error) {
+      console.error('Deletion failed:', error);
+    }
+  }
 }
