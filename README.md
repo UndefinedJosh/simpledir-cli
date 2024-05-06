@@ -8,8 +8,7 @@ It provides simple commands to handle directories and files.
 ## Features
 
 - List directory contents
-- Create and delete directories
-- Create and delete files
+- Create and delete directories and files with single commands
 
 ## Installation
 
