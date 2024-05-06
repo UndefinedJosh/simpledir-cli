@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "dist/index.js",
   "bin": {
-    "simpledir": "./dist/index.js"
+    "simpledir": "./dist/index.js",
+    "sid": "./dist/index.js"
   },
   "scripts": {
     "dev": "tsx watch src/index.ts",
