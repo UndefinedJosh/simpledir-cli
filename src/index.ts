@@ -39,6 +39,23 @@ program.command('rm')
     DirectoryManager.deleteByName(path.resolve(process.cwd(), name), recursive);
   });
 
+program.command('mk')
+  .alias('m')
+  .usage("<name> [options] [extension]")
+  .description('create either a file or directory')
+  .summary("create dir or file")
+  .argument('<name>', 'file or directory name')
+  .argument('[extension]', 'file extension')
+  .option('-f, --file', 'create a file')
+  .action(async (name: string, extension: string | undefined, options: any) => {
+    const file = options.file ? true : false;
+
+    if (file) {
+      await FileManager.createFile(path.resolve(process.cwd(), name), extension);
+    } else {
+      await DirectoryManager.createDirectory(path.resolve(process.cwd(), name));
+    }
+  });
 
 program.addHelpText('before', `${figlet.textSync('simpleDir')}`);
 
