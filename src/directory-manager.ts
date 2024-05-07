@@ -1,11 +1,20 @@
-const fs = require("fs").promises;
+const fse = require("fs-extra");
 const path = require("path");
 
 export class DirectoryManager {
   static async createDirectory(filePath: string) {
     try {
-      await fs.mkdir(filePath);
+      await fse.mkdir(filePath);
       console.log(`Directory ${path.basename(filePath)} created successfully.`);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async moveFileorDirectory(filePath: string, targetPath: string) {
+    try {
+      await fse.move(filePath, targetPath);
+      console.log(`Moved ${path.basename(filePath)} to ${targetPath}`);
     } catch (error) {
       throw error;
     }
@@ -13,9 +22,9 @@ export class DirectoryManager {
 
   static async listDirectoryContent(filePath: string) {
     try {
-      const files = await fs.readdir(filePath);
+      const files = await fse.readdir(filePath);
       const detailedFilesPromises = files.map(async (file: string) => {
-        const fileDetails = await fs.lstat(path.resolve(filePath, file));
+        const fileDetails = await fse.lstat(path.resolve(filePath, file));
         const { size, birthtime } = fileDetails;
         // Convert bytes to megabytes
         const sizeInMB = (size / (1024 * 1024)).toFixed(2); // Limit to 2 decimal places
@@ -35,7 +44,7 @@ export class DirectoryManager {
     try {
       // Check if recursive deletion is disabled and the path is a directory
       if (!recursive) {
-        const stats = await fs.lstat(filePath);
+        const stats = await fse.lstat(filePath);
         if (stats.isDirectory()) {
           console.error(
             `Cannot delete '${path.basename(filePath)}': It's a directory.`
@@ -44,7 +53,7 @@ export class DirectoryManager {
         }
       }
 
-      await fs.rm(filePath, { recursive: recursive });
+      await fse.rm(filePath, { recursive: recursive });
 
       console.log(
         `File or directory ${path.basename(filePath)} deleted successfully.`

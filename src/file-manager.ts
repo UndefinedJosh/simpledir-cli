@@ -1,4 +1,4 @@
-const fs = require('fs').promises;
+const fse = require('fs-extra');
 const path = require('path');
 
 export class FileManager {
@@ -28,7 +28,7 @@ export class FileManager {
         filePath = `${filePath}.${extension}`; // Adjust filePath to include the extension
       }
 
-      await fs.writeFile(filePath, fileContent);
+      await fse.writeFile(filePath, fileContent);
       if (extension) {
         console.log(
           `File ${path.basename(

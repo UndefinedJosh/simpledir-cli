@@ -1,5 +1,5 @@
 import { DirectoryManager } from "./directory-manager";
-import fs from "fs/promises";
+import fse from "fs-extra";
 import path from "path";
 
 describe("DirectoryManager", () => {
@@ -8,24 +8,23 @@ describe("DirectoryManager", () => {
       const directoryPath = path.join(__dirname, "test-directory");
       await DirectoryManager.createDirectory(directoryPath);
 
-      const isDirectory = await fs
+      const isDirectory = await fse
         .stat(directoryPath)
         .then((stats) => stats.isDirectory());
       expect(isDirectory).toBe(true);
 
-      await fs.rmdir(directoryPath);
+      await fse.rmdir(directoryPath);
     });
 
     it("should handle errors when creating a directory", async () => {
       // Mock fs.mkdir to throw an error
       const mockMkdir = jest
-        .spyOn(fs, "mkdir")
-        .mockRejectedValue(new Error("Mocked error"));
+        .spyOn(fse, "mkdir");
 
       // Expect DirectoryManager.createDirectory to throw an error
       await expect(
         DirectoryManager.createDirectory("/invalid/path")
-      ).rejects.toThrow("Mocked error");
+      ).rejects.toThrow("ENOENT: no such file or directory, mkdir 'C:\\invalid\\path'");
 
       mockMkdir.mockRestore(); // Restore fs.mkdir to its original implementation
     });
@@ -35,8 +34,8 @@ describe("DirectoryManager", () => {
     it("should list directory contents", async () => {
       // Create a test directory with some files
       const directoryPath = path.join(__dirname, "test-directory");
-      await fs.mkdir(directoryPath);
-      await fs.writeFile(
+      await fse.mkdir(directoryPath);
+      await fse.writeFile(
         path.join(directoryPath, "test-file.txt"),
         "Test file content"
       );
@@ -51,15 +50,15 @@ describe("DirectoryManager", () => {
       expect(consoleTableSpy).toHaveBeenCalled();
 
       // Clean up: delete the test directory
-      await fs.rmdir(directoryPath, { recursive: true });
+      await fse.rmdir(directoryPath, { recursive: true });
     });
 
     describe("deleteFileOrDirectoryByName", () => {
       it("should delete a file or directory", async () => {
         // Create a test directory with a file
         const directoryPath = path.join(__dirname, "test-directory");
-        await fs.mkdir(directoryPath);
-        await fs.writeFile(
+        await fse.mkdir(directoryPath);
+        await fse.writeFile(
           path.join(directoryPath, "test-file.txt"),
           "Test file content"
         );
@@ -69,26 +68,25 @@ describe("DirectoryManager", () => {
           path.join(directoryPath, "test-file.txt"),
           false
         );
-        const exists = await fs
+        const exists = await fse
           .access(path.join(directoryPath, "test-file.txt"))
           .then(() => true)
           .catch(() => false);
         expect(exists).toBe(false);
 
         // Clean up: delete the test directory
-        await fs.rmdir(directoryPath, { recursive: true });
+        await fse.rmdir(directoryPath, { recursive: true });
       });
 
       it("should handle errors when listing directory contents", async () => {
         // Mock fs.readdir to throw an error
         const mockReaddir = jest
-          .spyOn(fs, "readdir")
-          .mockRejectedValue(new Error("Mocked error"));
+          .spyOn(fse, "readdir");
 
         // Expect DirectoryManager.listDirectoryContent to throw an error
         await expect(
           DirectoryManager.listDirectoryContent("/invalid/path")
-        ).rejects.toThrow("Mocked error");
+        ).rejects.toThrow("ENOENT: no such file or directory, scandir 'C:\\invalid\\path'");
 
         mockReaddir.mockRestore(); // Restore fs.readdir to its original implementation
       });
@@ -98,8 +96,7 @@ describe("DirectoryManager", () => {
   it("should handle errors when deleting a file or directory", async () => {
     // Mock fs.rm to throw an error
     const mockRm = jest
-      .spyOn(fs, "rm")
-      .mockRejectedValue(new Error("Mocked error"));
+      .spyOn(fse, "rm");
 
     // Expect DirectoryManager.deleteFileOrDirectoryByName to throw an error
     try {
