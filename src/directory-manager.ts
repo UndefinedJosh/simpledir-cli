@@ -13,7 +13,7 @@ export class DirectoryManager {
 
   static async moveFileorDirectory(filePath: string, targetPath: string) {
     try {
-      await fse.move(filePath, targetPath);
+      await fse.move(filePath, `${targetPath}/${path.basename(filePath)}`);
       console.log(`Moved ${path.basename(filePath)} to ${targetPath}`);
     } catch (error) {
       throw error;
