@@ -1,6 +1,6 @@
 # Sid - SimpleDir CLI
 
-<img src="https://cdn.discordapp.com/attachments/1078480166457725048/1237124742696402944/karxem_a_logo_on_white_background_sid_from_ice_age_2d936c3c-3b46-4a47-b7b7-e4b48e33bc2c.png?ex=663a81b3&is=66393033&hm=49eb2588a9e360b490e30b19767eb7677ddcab5edfd679faaa6b788d581a0acb&" alt="Sid Logo" width="100" height="100">
+<img src="https://cdn.discordapp.com/attachments/1078480166457725048/1237421760140415006/karxem_Ice_Age_Character_Animated_Style_An_animated_style_avata_ef3bb569-b545-4577-9f0c-5f8b0809213c.png?ex=663b9651&is=663a44d1&hm=478834d3b2a21008e8da42e7394fe0daef048d97598e0839fa0937e551341805&" alt="Sid Logo" width="100" height="100">
 
 SimpleDir is a CLI tool for managing directories and files.
 
