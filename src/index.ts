@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const { Command } = require('commander');
-import { DirectoryManager } from './DirectoryManager';
-import { FileManager } from './FileManager';
+import { DirectoryManager } from './directory-manager';
+import { FileManager } from './file-manager';
 
 const path = require('path');
 const figlet = require('figlet');
@@ -36,7 +36,7 @@ program.command('rm')
   .option('--no-recursive', 'disable recursion')
   .action((name: string, options: any) => {
     const recursive = options.recursive !== false;
-    DirectoryManager.deleteByName(path.resolve(process.cwd(), name), recursive);
+    DirectoryManager.deleteFileOrDirectoryByName(path.resolve(process.cwd(), name), recursive);
   });
 
 program.command('mk')
@@ -59,4 +59,5 @@ program.command('mk')
 
 program.addHelpText('before', `${figlet.textSync('simpleDir')}`);
 
+if (process.argv.length <= 2) program.outputHelp();
 program.parse(process.argv);
