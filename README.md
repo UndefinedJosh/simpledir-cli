@@ -8,6 +8,7 @@ SimpleDir is a CLI tool for managing directories and files.
 
 - List directory contents
 - Create and delete directories and files with single commands
+- Move directories and files
 
 ## Installation
 
@@ -45,6 +46,14 @@ simpledir rm <name> [options]
 
 Use the `rm` option followed by the path of the directory you want to delete.
 
+### Move a Directory or File
+
+```bash
+simpledir go <name> <target>
+```
+
+Use the `go` option followed by the paths of the directories you want to move.
+
 ## Example
 Create a JavaScript file using sid:
 ```bash
@@ -59,10 +68,10 @@ Contributions are welcome! <br>
 Commits need to follow the [semantic commit](https://www.conventionalcommits.org/en/v1.0.0/) rules. Please follow these steps to contribute:
 
 1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
+2. Create a new branch (`git checkout -b feat/your-feature`)
 3. Make your changes
-4. Commit your changes (`git commit -am 'commit message`)
-5. Push to the branch (`git push origin feature/your-feature`)
+4. Commit your changes (`git commit -am 'feat: commit message`)
+5. Push to the branch (`git push origin feat/your-feature`)
 6. Create a new Pull Request
 
 ## License
