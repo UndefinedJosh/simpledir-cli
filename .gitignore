@@ -11,5 +11,8 @@ dist/
 *.code-workspace
 .DS_Store
 
+# Jest
+coverage
+
 # Logs
 *.log
