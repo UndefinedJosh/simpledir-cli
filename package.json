@@ -1,6 +1,7 @@
 {
   "name": "simpledir",
   "version": "1.1.0",
+  "description": "SimpleDir is a CLI tool for managing directories and files.",
   "main": "dist/index.js",
   "bin": {
     "simpledir": "./dist/index.js",
