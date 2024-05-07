@@ -11,7 +11,7 @@ const program = new Command();
 
 program.name('simpledir')
   .description('A CLI tool for managing directories')
-  .version('1.0.0', '-v, --version', 'output cli version')
+  .version('1.1.0', '-v, --version', 'output cli version')
   .usage('<command> | [option]')
   .helpOption('-h, --help', 'display help overview')
   .option('-l, --ls [directory_path]', 'list directory contents')
@@ -29,9 +29,9 @@ program.showHelpAfterError('use --help for additional information');
 
 program.command('rm')
   .alias('r')
-  .usage("<name> [options]")
+  .usage('<name> [options]')
   .description('delete the selected file or directory')
-  .summary("delete dir or file")
+  .summary('delete dir or file')
   .argument('<name>', 'file or directory name')
   .option('--no-recursive', 'disable recursion')
   .action((name: string, options: any) => {
@@ -41,9 +41,9 @@ program.command('rm')
 
 program.command('mk')
   .alias('m')
-  .usage("<name> [options] [extension]")
+  .usage('<name> [options] [extension]')
   .description('create either a file or directory')
-  .summary("create dir or file")
+  .summary('create dir or file')
   .argument('<name>', 'file or directory name')
   .argument('[extension]', 'file extension')
   .option('-f, --file', 'create a file')
@@ -56,6 +56,16 @@ program.command('mk')
       await DirectoryManager.createDirectory(path.resolve(process.cwd(), name));
     }
   });
+
+  program.command('go')
+    .alias('g')
+    .description('move either a file or directory')
+    .summary('move dir or file')
+    .argument('<name>', 'file or directory name')
+    .argument('<target>', 'target relative path')
+    .action(async (name: string, target: string) => {
+      await DirectoryManager.moveFileorDirectory(name, target);
+    });
 
 program.addHelpText('before', `${figlet.textSync('simpleDir')}`);
 
