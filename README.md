@@ -2,8 +2,7 @@
 
 <img src="https://cdn.discordapp.com/attachments/1078480166457725048/1237124742696402944/karxem_a_logo_on_white_background_sid_from_ice_age_2d936c3c-3b46-4a47-b7b7-e4b48e33bc2c.png?ex=663a81b3&is=66393033&hm=49eb2588a9e360b490e30b19767eb7677ddcab5edfd679faaa6b788d581a0acb&" alt="Sid Logo" width="100" height="100">
 
-SimpleDir is a CLI tool for managing directories and files. <br>
-It provides simple commands to handle directories and files.
+SimpleDir is a CLI tool for managing directories and files.
 
 ## Features
 
