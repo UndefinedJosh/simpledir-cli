@@ -41,7 +41,7 @@ describe('FileManager', () => {
       // Expect FileManager.createFile to throw an error
       await expect(
         FileManager.createFile('/invalid/path', undefined)
-      ).rejects.toThrow("ENOENT: no such file or directory, open 'C:\\invalid\\path'");
+      ).rejects.toThrow("ENOENT: no such file or directory, open '/invalid/path'");
 
       mockWriteFile.mockRestore(); // Restore fs.writeFile to its original implementation
     });

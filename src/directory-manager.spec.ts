@@ -24,7 +24,7 @@ describe("DirectoryManager", () => {
       // Expect DirectoryManager.createDirectory to throw an error
       await expect(
         DirectoryManager.createDirectory("/invalid/path")
-      ).rejects.toThrow("ENOENT: no such file or directory, mkdir 'C:\\invalid\\path'");
+      ).rejects.toThrow("ENOENT: no such file or directory, mkdir '/invalid/path'");
 
       mockMkdir.mockRestore(); // Restore fs.mkdir to its original implementation
     });
@@ -86,7 +86,7 @@ describe("DirectoryManager", () => {
         // Expect DirectoryManager.listDirectoryContent to throw an error
         await expect(
           DirectoryManager.listDirectoryContent("/invalid/path")
-        ).rejects.toThrow("ENOENT: no such file or directory, scandir 'C:\\invalid\\path'");
+        ).rejects.toThrow("ENOENT: no such file or directory, scandir '/invalid/path'");
 
         mockReaddir.mockRestore(); // Restore fs.readdir to its original implementation
       });
