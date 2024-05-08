@@ -1,13 +1,12 @@
+name: Unit Tests
+
 on:
   push:
     branches:
       - "**"
-  pull_request:
-    types:
-      - opened
 
 jobs:
-  unit_tests:
+  testing:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
