@@ -1,3 +1,4 @@
+[![Unit Tests](https://github.com/Karxem/simpledir-cli/actions/workflows/unit_tests.yml/badge.svg?branch=main)](https://github.com/Karxem/simpledir-cli/actions/workflows/unit_tests.yml)
 # Sid - SimpleDir CLI
 
 <img src="https://cdn.discordapp.com/attachments/1078480166457725048/1237421760140415006/karxem_Ice_Age_Character_Animated_Style_An_animated_style_avata_ef3bb569-b545-4577-9f0c-5f8b0809213c.png?ex=663b9651&is=663a44d1&hm=478834d3b2a21008e8da42e7394fe0daef048d97598e0839fa0937e551341805&" alt="Sid Logo" width="100" height="100">
