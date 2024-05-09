@@ -3,7 +3,6 @@ const path = require('path');
 
 export class FileManager {
   static async createFile(filePath: string, extension: string | undefined) {
-    let fileContent = '';
     try {
       if (extension) {
         // List of recognized extensions
@@ -23,12 +22,10 @@ export class FileManager {
           throw new Error(`Unknown extension: ${extension}`);
         }
 
-        // Set file content with a comment indicating the file's name
-        fileContent = `// ${path.basename(filePath)} file`;
         filePath = `${filePath}.${extension}`; // Adjust filePath to include the extension
       }
 
-      await fse.writeFile(filePath, fileContent);
+      await fse.writeFile(filePath, "");
       if (extension) {
         console.log(
           `File ${path.basename(
