@@ -39,7 +39,7 @@ export class FileManager {
         console.log(`File ${path.basename(filePath)} created successfully.`);
       }
     } catch (error) {
-      throw error; // Throw the error to propagate it to the caller
+      throw error;
     }
   }
 }
